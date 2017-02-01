@@ -1,11 +1,21 @@
-Project "Smart goal"
-It is a tool which helps to reach goals.
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% block title %}
+SMART GOAL
+{% endblock %}
+{% block content %}
+    <h1>Welcome to the family!</h1>
+    <h2>Let's be effective.</h2>
+    {% for i in smart %}
+        {{i}}<br>
+    {% endfor %}
+    <h3>Project "Smart goal"</h3>
+    <p>This is a tool which helps to reach goals.
     You can write down goal, decompose it to several tasks (and sub-tasks), mark deadlines for each of them.
     Tasks can have a priority and severity, and connection to the other task (has to be done after, has to be done before, etc).
     You can invite other person to work on task together.
     You can filter them: status - new, in progress, complete; percentage of completion; etc.
     You can tune visibility of your goal.
     Every goal has a criterias of completion.
-    (the simpliest version of jira atlassian) 
-
-(the simpliest version of jira atlassian or smartprogress.ru)
+    (the simpliest version of jira atlassian)</p>
+{% endblock %}
