@@ -1,25 +1,77 @@
-from django.shortcuts import render, render_to_response,Http404, get_object_or_404, loader
-import datetime
-from django.contrib.auth.models import User
-from django.http import JsonResponse
-from django.core.exceptions import ObjectDoesNotExist
-from django.contrib import auth
+from django.shortcuts import render_to_response,Http404, get_object_or_404
 from django.shortcuts import render, HttpResponseRedirect
+from .models import *
+from userManagmentApp.forms import TasksForm
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     smart = ['Specific', 'Measurable', 'Achievable', 'Relevant', 'Time bound']
-    #return render_to_response("index.html", {'smart':smart})
-    return render(request, "index.html", {'smart':smart})
+    categorys = Category.objects.all()
+    return render(request, "index.html", {'smart': smart, 'categorys':categorys})
 
-def login(request):
+@login_required(login_url='/index/')
+def task(request):
+    tasks = Tasks.objects.filter()
+    categorys = Category.objects.all()
+    return render(request, 'dashboard.html', {'categorys':categorys, 'tasks':tasks})
+
+@login_required(login_url='/index/')
+def overview(request):
+    tasks = Tasks.objects.all()
+    return render(request, 'overview.html', {'tasks':tasks})
+
+@login_required(login_url='/index/')
+def create(request):
     if request.method == 'POST':
-        print("POST data =", request.POST)
-        username = request.POST.get('login')
-        password = request.POST.get('password')
-        user = auth.authenticate(username=username, password=password)
-        if user is not None:
-            auth.login(request, user)
-            return HttpResponseRedirect("/")
-        else:
-            return render(request, 'index.html', {'username': username, 'errors': True})
-    raise Http404
+        form = TasksForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/create/')
+        context = {'form': form}
+        return render(request, 'create.html', context)
+    context = {'form': TasksForm()}
+    return render(request, 'create.html', context)
+    #return render(request, 'create.html')
+
+@login_required(login_url='/index/')
+def settings(request):
+    return render(request, 'settings.html')
+
+@login_required(login_url='/index/')
+def team_work(request):
+    return render(request, 'team_work.html')
+'''
+def task_detail(request, id):
+    task = get_object_or_404(Tasks, id=id)
+    return render(request, 'task_detail.html', {'task':task})'''
+
+'''def admin_gems_create(request):
+    if request.method == 'POST':
+        form = GemsForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/admin/gems/')
+        context = {'form': form}
+        return render(request, 'admin_gems_create.html', context)
+    context = {'form': GemsForm()}
+    return render(request, 'admin_gems_create.html', context)
+
+
+def admin_gems_delete(request, id):
+    gem = get_object_or_404(Gem, id=id)
+    gem.delete()
+    return HttpResponseRedirect('/admin/gems/')
+
+
+def admin_gems_update(request, id):
+    gem = get_object_or_404(Gem, id=id)
+    if request.method == 'POST':
+        # form = GemsForm(request.POST or None, instance=gem)
+        form = GemsForm(request.POST, instance=gem)
+        if form.is_valid():
+            gem.save()
+            return HttpResponseRedirect('/admin/gems/')
+        context = {'form': form}
+        return render(request, 'admin_gems_update.html', context)
+    context = {'form': GemsForm(instance=gem)}
+    return render(request, 'admin_gems_update.html', context)'''''
