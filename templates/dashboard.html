@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}
+    Dashboard
+{% endblock %}
+{% block content %}
+    <h1>All tasks with category filter </h1>
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            {% if categorys %}
+                {% for category in categorys %}
+                <li><a href="{# url 'tasks' category.id #}">{{category.name}}</a></li>
+                {% endfor %}
+            {% else %}
+            There is no categories in project.
+            {% endif %}
+            <li role="separator" class="divider"></li>
+            <li><a href="#">All together</a></li>
+        </ul>
+    </li>
+    <h2>Tasks</h2>
+    {% if tasks %}
+        {% for task in tasks %}
+            <h4>Task-00{{task.id}}: {{task.title}}</h4>
+            <b>Status: </b> {{task.status}} <br>
+            <b>Priority: </b>{{task.priority}}<br>
+            <b>Has to be done before:</b> {{ task.deadline }}<br>
+            {{task.description}}<br>
+            <b>Category: </b> {{ task.category }}<br>
+            <sub>{{task.created_date}}</sub><br>
+            <hr />
+        {% endfor %}
+    {% else %}
+        Have no tasks yet.
+    {% endif %}
+{% endblock %}

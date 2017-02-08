@@ -9,3 +9,8 @@ It is a tool which helps to reach goals.
     (the simpliest version of jira atlassian) 
 
 (the simpliest version of jira atlassian or smartprogress.ru)
+
+TODO: 
+- fix code for /admin_page - it doesn't work now - change and add new user (can remove only)
+- send email after registration 
+- add registration with help social accaunt

@@ -24,6 +24,8 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+{% block js %}
+{% endblock %}
 <body>
     <div id="wrapper">
         <!-- Navigation -->
@@ -40,7 +42,7 @@
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
-               <li>
+                <li>
                     <i class="fa fa-user"></i>{% include 'inc-login_form.html' %}
                 </li>
                 <li class="dropdown">
@@ -135,51 +137,30 @@
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="{% if not page %}active{% endif %}">
-                        <a href="/">About</a>
-                    </li>
-                    <li class="{% if page == 'dashboard' %}active{% endif %}">
-                        <a href="/dashboard"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-                    </li>
-                   <li class="{% if page == 'overview' %}active{% endif %}">
-                        <a href="/overview"><i class="fa fa-fw fa-table"></i> Overview</a>
-                    </li>
-                    <li class="{% if page == 'create' %}active{% endif %}">
-                        <a href="/create"><i class="fa fa-fw fa-edit"></i> Create new one</a>
-                    </li>
-                    <li class="{% if page == 'team_work' %}active{% endif %}">
-                        <a href="/team_work"><i class="fa fa-fw fa-desktop"></i> Team work</a>
-                    </li>
-                    <li class="{% if page == 'settings' %}active{% endif %}">
-                        <a href="/admin"><i class="fa fa-fw fa-wrench"></i> Settings</a>
+                    <li class="active">
+                        <a>Admin's territory</a>
                     </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
         </nav>
-
         <div id="page-wrapper">
-             {% block content %}{% endblock %}
+            {% block content %}
+
+            {% endblock %}
         </div>
         <!-- /#page-wrapper -->
-
-
     </div>
     <!-- /#wrapper -->
-
     <!-- jQuery -->
     <script src="{% static 'js/jquery.js' %}"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-
     <!-- Morris Charts JavaScript -->
     <script src="{% static 'js/plugins/morris/raphael.min.js' %}"></script>
     <script src="{% static 'js/plugins/morris/morris.min.js' %}"></script>
     <script src="{% static 'js/plugins/morris/morris-data.js' %}"></script>
-
 </body>
-
 </html>
 <!-- </div>
     <footer>

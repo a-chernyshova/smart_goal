@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}
+    Overview
+{% endblock %}
+{% block content %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="page-header">
+                            <h1>All tasks</h1>
+                            <sub>TODO: add something to make different with dashboard </sub></h1>
+                        </div>
+                    </div>
+                </div>
+                <h3>List of tasks</h3>
+                {% if tasks %}
+                    {% for task in tasks %}
+                        <h4>Task-00{{task.id}}: {{task.title}}</h4>
+                        <b>Status: </b> {{task.status}} <br>
+                        <b>Priority: </b>{{task.priority}}<br>
+                        <b>Has to be done before:</b> {{ task.deadline }}<br>
+                        {{task.description}}<br>
+                        <b>Category: </b> {{ task.category }}<br>
+                        <sub>{{task.created_date}}</sub><br>
+                        <hr />
+        {% endfor %}
+    {% else %}
+        Have no tasks yet.
+    {% endif %}
+{% endblock %}

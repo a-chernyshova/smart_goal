@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}
+    Create new goal
+{% endblock %}
+{% block content %}
+    <h1>Здесь будет форма создания объекта</h1>
+    {% for task in tasks %}
+    <li>
+        <a href="{% url 'tasks_detail' task.id %}">{{task.title}}</a>
+        <a href="{% url 'tasks_delete' task.id %}">Remove</a>
+        <a href="{% url 'tasks_update' task.id %}">Change</a>
+    </li>
+    {% endfor %}
+    <a href="{% url 'create' %}">ADD</a>
+{% endblock %}
