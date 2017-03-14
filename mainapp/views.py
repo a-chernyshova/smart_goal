@@ -3,6 +3,7 @@ from django.shortcuts import render, HttpResponseRedirect
 from .models import *
 from userManagmentApp.forms import TasksForm
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def index(request):
     smart = ['Specific', 'Measurable', 'Achievable', 'Relevant', 'Time bound']
@@ -13,7 +14,18 @@ def index(request):
 def task(request):
     tasks = Tasks.objects.filter()
     categorys = Category.objects.all()
-    return render(request, 'dashboard.html', {'categorys':categorys, 'tasks':tasks})
+    statuses = Status.objects.all()
+    paginator = Paginator(tasks, 3)
+    page = request.GET.get('page')
+    try:
+        tasks = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        tasks = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        tasks = paginator.page(paginator.num_pages)
+    return render(request, 'dashboard.html', {'categorys': categorys, 'tasks': tasks, 'statuses': statuses})
 
 @login_required(login_url='/index/')
 def overview(request):
@@ -40,10 +52,13 @@ def settings(request):
 @login_required(login_url='/index/')
 def team_work(request):
     return render(request, 'team_work.html')
-'''
-def task_detail(request, id):
+
+@login_required(login_url='/index/')
+def detail(request, id):
     task = get_object_or_404(Tasks, id=id)
-    return render(request, 'task_detail.html', {'task':task})'''
+    comments = Comments.objects.filter(task_id=id)
+    subtasks = Sub_tasks.objects.filter(task_id=id)
+    return render(request, 'detail.html', {'task': task, 'subtasks': subtasks, 'comments': comments})
 
 '''def admin_gems_create(request):
     if request.method == 'POST':
@@ -74,4 +89,4 @@ def admin_gems_update(request, id):
         context = {'form': form}
         return render(request, 'admin_gems_update.html', context)
     context = {'form': GemsForm(instance=gem)}
-    return render(request, 'admin_gems_update.html', context)'''''
+    return render(request, 'admin_gems_update.html', context)'''

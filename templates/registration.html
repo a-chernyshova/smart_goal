@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% block title %}Registration{% endblock %}
 {% block content %}
-     <div class="collapse navbar-collapse navbar-ex1-collapse">
-          <h3>Fill the fields to continue registration</h3>
-          <div class="register">
-              <form method="post" role="form" action="/user/registration/">
-                  {# include 'inc-registration_form.html' #}
-                  {% include 'inc-reg_form_as_table.html' %}
-                  <input type="submit" value="Create the account">
-              </form>
-          </div>
-     </div>
-
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <div class="col-lg-6 text-left">
+        <h3>Fill the fields to continue registration</h3>
+        <div class="register">
+            <form method="post" role="form" action="/user/registration/">
+                {% include 'inc-reg_form_as_table.html' %}
+                <input type="submit" value="Create the account">
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}

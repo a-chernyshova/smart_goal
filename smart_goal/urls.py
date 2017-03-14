@@ -1,14 +1,3 @@
-"""smart_goal URL Configuration
-Examples:
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.conf.urls import url, include
-    2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
-"""
 from django.conf.urls import url
 from django.contrib import admin
 from mainapp.views import *
@@ -35,4 +24,5 @@ urlpatterns += [
     url(r'^admin_page/delete/user/(\d+)$', delete_user),
     url(r'^admin_page/get_user_form/(\d+)$', get_user_form),
     url(r'^admin_page/create/user/(\d*)$', create_user),
+    url(r'^([0-9]+)/$', detail, name='detail'),
 ]

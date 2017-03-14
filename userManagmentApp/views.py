@@ -9,7 +9,6 @@ from django.template.context_processors import csrf
 from django.http import Http404, JsonResponse
 from django.core.mail import send_mail
 
-
 def login(request):
     if request.method == 'POST':
         username = request.POST.get('login')
@@ -35,7 +34,7 @@ def registration(request):
         context = {'form': form}
         return render(request, 'registration.html', context)
     context = {'form': MyRegistrationForm()}
-    #send email to user after registration
-    #send_mail('You were successfully registered on SMART GOAL portal', 'Thank you for joining us! Lets be more effective!', 'chernyshova.anastasia@gmail.com', [user.email], fail_silently=False)
+    # send_mail('You were successfully registered on SMART GOAL portal', 'Thank you for joining us!
+    # Lets be more effective!',
+    # 'chernyshova.anastasia@gmail.com', [user.email], fail_silently=False)
     return render(request, 'registration.html', context)
-
