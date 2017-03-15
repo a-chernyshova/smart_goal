@@ -43,8 +43,9 @@ class Comments(models.Model):
 class Sub_tasks(models.Model):
     author = models.ForeignKey(User)
     task = models.ForeignKey(Tasks)
-    title = models.CharField(verbose_name='title', max_length=120, blank = False)
+    title = models.CharField(verbose_name='title', max_length=120, blank=False)
     description = models.TextField()
+    status = models.ForeignKey(Status)
     created_date = models.DateTimeField()
     def __str__(self):
         return self.title

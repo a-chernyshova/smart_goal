@@ -25,4 +25,6 @@ urlpatterns += [
     url(r'^admin_page/get_user_form/(\d+)$', get_user_form),
     url(r'^admin_page/create/user/(\d*)$', create_user),
     url(r'^([0-9]+)/$', detail, name='detail'),
+    url(r'^subtask-([0-9]+)/$', subtask_detail, name='subtask_detail'),
+    url(r'^filter/(\d+)/$', category),
 ]

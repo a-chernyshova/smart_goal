@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ subtask.title }}
+{% endblock %}
+{% block content %}
+{% if subtask %}
+<div class="row">
+    <div class="col-lg-9 text-left">
+        <h3><i class="fa fa-tasks" aria-hidden="true"></i> Sub-task-0{{subtask.id}}: {{subtask.title}}</h3>
+        <div class="col-lg-11">
+            {{subtask.description}}
+        </div>
+    </div>
+    <div class="col-lg-3 text-left">
+        <br>
+        <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#demo1"
+                data-toggle="tooltip" data-placement='top' title="Click me"><a href="/{{subtask.task.id}}/">Back to task</a>
+        </button>
+        <br>
+        <sub><b>Status: </b> {{subtask.status}} <br>
+            {{subtask.created_date}}</sub><br>
+        <sub><i class="fa fa-user" aria-hidden="true"></i> Author: {{subtask.author}}</sub><br>
+    </div>
+</div>
+{% else %}
+Have no sub-tasks yet.
+{% endif %}
+</div>
+{% endblock %}

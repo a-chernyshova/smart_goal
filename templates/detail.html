@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ task.title }}
+{% endblock %}
+{% block content %}
+{% if task %}
+<div class="row">
+    <div class="col-lg-8 text-left">
+        <h2> <i class="fa fa-thumb-tack" aria-hidden="true"></i> Task-0{{task.id}}: {{task.title}}</h2></a>
+        <b>Has to be done before:</b> {{ task.deadline }}<br>
+        {{task.description}}
+    </div>
+    <div class="col-lg-4 text-left">
+        <br><br>
+        <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#demo1"
+            data-toggle="tooltip" data-placement='top' title="Click me"> <a href="/dashboard">Back to dashboard</a>
+        </button><br>
+        <sub><b>Status: </b> {{task.status}} <br>
+            <b>Priority: </b>{{task.priority}}<br>
+            <b>Category: </b> {{ task.category }}<br>
+            {{task.created_date}}</sub><br>
+        <sub><i class="fa fa-user" aria-hidden="true"></i> Author: {{task.author}}</sub><br>
+        {% if task.img %}
+        <img src="{{ task.img.url }}"><br>
+        {% endif %}
+    </div>
+</div>
+<hr/>
+<div class="row">
+    <div class="col-lg-8 text-left">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapse1">Show sub-tasks</a>  <button class="left">Add sub-task</button>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse">
+                    <table class="table table-hover">
+                        {% if subtasks %}
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Created</th>
+                        </tr>
+                        </thead>
+                        <div class="panel-body">
+                            <tbody>
+                            {% for subtask in subtasks %}
+                            <tr>
+                                <td><a href="/subtask-{{subtask.id}}/">st-{{subtask.id}}</a>  </td>
+                                <td>{{subtask.title}}</td>
+                                <td>{{subtask.author}}</td>
+                                <td>{{subtask.created_date}}</td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            There is no sub-tasks yet.
+                            {% endif %}
+                            </tbody>
+                        </div>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-8 text-left">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#demo">Show comments</a>    <button class="left">Add comment</button>
+                    </h4>
+                </div>
+                <div id='demo' class="collapse">
+                    {% if comments %}
+                    {% for comment in comments %}
+                    <div class="col-lg-10 text-left">
+                        <br><p>{{comment.body}}<br>
+                        <sub>Commented by <b>{{comment.author}}</b></sub></p>
+                        <hr>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    There is no comments yet.
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% else %}
+Have no tasks yet.
+{% endif %}
+</div>
+{% endblock %}

@@ -28,6 +28,13 @@ def task(request):
     return render(request, 'dashboard.html', {'categorys': categorys, 'tasks': tasks, 'statuses': statuses})
 
 @login_required(login_url='/index/')
+def category(request, category_id):
+    tasks = Tasks.objects.filter(category=category_id)
+    categorys = Category.objects.all()
+    statuses = Status.objects.all()
+    return render(request, 'filter.html', {'categorys': categorys, 'tasks': tasks, 'statuses': statuses})
+
+@login_required(login_url='/index/')
 def overview(request):
     tasks = Tasks.objects.all()
     return render(request, 'overview.html', {'tasks':tasks})
@@ -50,15 +57,20 @@ def settings(request):
     return render(request, 'settings.html')
 
 @login_required(login_url='/index/')
-def team_work(request):
-    return render(request, 'team_work.html')
-
-@login_required(login_url='/index/')
 def detail(request, id):
     task = get_object_or_404(Tasks, id=id)
     comments = Comments.objects.filter(task_id=id)
     subtasks = Sub_tasks.objects.filter(task_id=id)
     return render(request, 'detail.html', {'task': task, 'subtasks': subtasks, 'comments': comments})
+
+@login_required(login_url='/index/')
+def subtask_detail(request, id):
+    subtask = get_object_or_404(Sub_tasks, id=id)
+    return render(request, 'sub_task.html', {'subtask': subtask})
+
+@login_required(login_url='/index/')
+def team_work(request):
+    return render(request, 'team_work.html')
 
 '''def admin_gems_create(request):
     if request.method == 'POST':
