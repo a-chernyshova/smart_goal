@@ -3,6 +3,8 @@ from django.contrib import admin
 from mainapp.views import *
 from userManagmentApp.views import *
 from adminApp.views import *
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -19,7 +21,7 @@ urlpatterns += [
     url(r'^dashboard/$', task),
     url(r'^overview/$', overview),
     url(r'^create/$', create),
-    url(r'^settings/$', settings),
+    url(r'^settings/$', setting),
     url(r'^team_work/$', team_work),
     url(r'^admin_page/delete/user/(\d+)$', delete_user),
     url(r'^admin_page/get_user_form/(\d+)$', get_user_form),
@@ -28,5 +30,7 @@ urlpatterns += [
     url(r'^subtask-([0-9]+)/$', subtask_detail, name='subtask_detail'),
     url(r'^filter/(\d+)/$', category),
     url(r'^category_filter', category_filter),
-    url(r'^state_filter', state_filter)
+    url(r'^state_filter', state_filter),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

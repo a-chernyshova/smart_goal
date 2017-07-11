@@ -32,7 +32,7 @@ class Tasks(models.Model):
     description = models.TextField(verbose_name='description', blank=False)
     created_date = models.DateTimeField(verbose_name='Date of creation')
     priority = models.ForeignKey(Priority)
-    img = models.ImageField(default='media/default.jpg', blank=True)
+    img = models.ImageField(default='/default.jpg', blank=True)
     attachments = models.FileField(blank=True)
     status = models.ForeignKey(Status)
     category = models.ForeignKey(Category)

@@ -42,6 +42,8 @@ def state_filter(request):
 @login_required(login_url='/index/')
 def task(request):
     tasks = Tasks.objects.filter()
+    for task in tasks:
+        print(task.img.url)
     categorys = Category.objects.all()
     statuses = Status.objects.all()
     paginator = Paginator(tasks, 3)
@@ -82,7 +84,7 @@ def create(request):
     #return render(request, 'create.html')
 
 @login_required(login_url='/index/')
-def settings(request):
+def setting(request):
     return render(request, 'settings.html')
 
 @login_required(login_url='/index/')
