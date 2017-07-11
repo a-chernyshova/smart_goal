@@ -13,6 +13,33 @@ def index(request):
 
 
 @login_required(login_url='/index/')
+def category_filter(request):
+    if request.method == 'POST':
+        category_id = request.POST.get('source')
+        if category_id == '0':
+            tasks = Tasks.objects.all()
+        else:
+            tasks = Tasks.objects.filter(category=category_id)
+        categorys = Category.objects.all()
+        statuses = Status.objects.all()
+        return render(request, 'dashboard.html', {'categorys': categorys, 'tasks': tasks, 'statuses': statuses})
+
+
+@login_required(login_url='/index/')
+def state_filter(request):
+    if request.method == 'POST':
+        state_id = request.POST.get('source')
+        print(state_id)
+        if state_id == '0':
+            tasks = Tasks.objects.all()
+        else:
+            tasks = Tasks.objects.filter(status=state_id)
+        categorys = Category.objects.all()
+        statuses = Status.objects.all()
+        return render(request, 'dashboard.html', {'categorys': categorys, 'tasks': tasks, 'statuses': statuses})
+
+
+@login_required(login_url='/index/')
 def task(request):
     tasks = Tasks.objects.filter()
     categorys = Category.objects.all()

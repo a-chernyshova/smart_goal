@@ -27,4 +27,6 @@ urlpatterns += [
     url(r'^([0-9]+)/$', detail, name='detail'),
     url(r'^subtask-([0-9]+)/$', subtask_detail, name='subtask_detail'),
     url(r'^filter/(\d+)/$', category),
+    url(r'^category_filter', category_filter),
+    url(r'^state_filter', state_filter)
 ]
