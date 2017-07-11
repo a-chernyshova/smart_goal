@@ -6,33 +6,23 @@
 {% if task %}
 <div class="row">
     <div class="col-lg-8 text-left">
-        <h2> <i class="fa fa-thumb-tack" aria-hidden="true"></i> Task-0{{task.id}}: {{task.title}}</h2></a>
-        <b>Has to be done before:</b> {{ task.deadline }}<br>
-        {{task.description}}
-    </div>
-    <div class="col-lg-4 text-left">
-        <br><br>
-        <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#demo1"
-            data-toggle="tooltip" data-placement='top' title="Click me"> <a href="/dashboard">Back to dashboard</a>
-        </button><br>
-        <sub><b>Status: </b> {{task.status}} <br>
-            <b>Priority: </b>{{task.priority}}<br>
-            <b>Category: </b> {{ task.category }}<br>
-            {{task.created_date}}</sub><br>
-        <sub><i class="fa fa-user" aria-hidden="true"></i> Author: {{task.author}}</sub><br>
-        {% if task.img %}
-        <img src="{{ task.img.url }}"><br>
-        {% endif %}
-    </div>
-</div>
-<hr/>
-<div class="row">
-    <div class="col-lg-8 text-left">
-        <div class="panel-group">
+        <div>
+            <h2> <i class="fa fa-thumb-tack" aria-hidden="true"></i> Task-0{{task.id}}: {{task.title}}</h2></a>
+            <b>Has to be done before:</b> {{ task.deadline }}<br>
+            <hr>
+            <br>
+            <div class="col-lg-10 text-left">
+            {{task.description}}
+                <hr>
+            </div>
+        </div>
+        <br>
+        <div class="col-lg-9">
+            <div class="panel-group">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" href="#collapse1">Show sub-tasks</a>  <button class="left">Add sub-task</button>
+                        <a data-toggle="collapse" href="#collapse1">Show {{ subtasks.count }} sub-tasks</a>  <button class="left">Add sub-task</button>
                     </h4>
                 </div>
                 <div id="collapse1" class="panel-collapse collapse">
@@ -65,15 +55,13 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-8 text-left">
-        <div class="panel-group">
+        </div>
+        <div class="col-lg-9">
+            <div class="panel-group">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" href="#demo">Show comments</a>    <button class="left">Add comment</button>
+                        <a data-toggle="collapse" href="#demo">Show {{ comments.count }} comments</a>    <button class="left">Add comment</button>
                     </h4>
                 </div>
                 <div id='demo' class="collapse">
@@ -91,8 +79,24 @@
                 </div>
             </div>
         </div>
+        </div>
+    </div>
+    <div class="col-lg-4 text-left">
+        <br><br>
+        <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#demo1"
+            data-toggle="tooltip" data-placement='top' title="Click me"> <a href="/dashboard">Back to dashboard</a>
+        </button><br>
+        <sub><b>Status: </b> {{task.status}} <br>
+            <b>Priority: </b>{{task.priority}}<br>
+            <b>Category: </b> {{ task.category }}<br>
+            {{task.created_date}}</sub><br>
+        <sub><i class="fa fa-user" aria-hidden="true"></i> Author: {{task.author}}</sub><br>
+        {% if task.img %}
+        <img height="250px" src="{{ task.img.url }}"><br>
+        {% endif %}
     </div>
 </div>
+<hr/>
 
 {% else %}
 Have no tasks yet.
