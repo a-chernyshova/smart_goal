@@ -9,6 +9,7 @@ from django.template.context_processors import csrf
 from django.http import Http404, JsonResponse
 from django.core.mail import send_mail
 
+
 def login(request):
     if request.method == 'POST':
         username = request.POST.get('login')
@@ -21,9 +22,11 @@ def login(request):
             return render(request, 'index.html', {'username': username, 'errors': True})
     raise Http404
 
+
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect("/")
+
 
 def registration(request):
     if request.method == 'POST':

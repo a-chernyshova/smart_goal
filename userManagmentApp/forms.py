@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from mainapp.models import Tasks
 
-
 class MyRegistrationForm(UserCreationForm):
     username = forms.CharField(label='User name', widget=forms.TextInput(attrs={'placeholder':'User name'}))
     password2 = forms.CharField(label='Repeat the password', required=False, help_text='Repeat the password correctly')

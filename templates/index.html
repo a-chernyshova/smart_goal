@@ -88,22 +88,22 @@
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li class="{% if not page %}active{% endif %}">
+                <li class="{% if not request.path %}active{% endif %}">
                     <a href="/">About</a>
                 </li>
-                <li class="{% if page == 'dashboard' %}active{% endif %}">
+                <li class="{% if request.path == '/dashboard/' %}active{% endif %}">
                     <a href="/dashboard"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                 </li>
-                <li class="{% if page == 'overview' %}active{% endif %}">
+                <li class="{% if request.path == '/overview/' %}active{% endif %}">
                     <a href="/overview"><i class="fa fa-fw fa-table"></i> Overview</a>
                 </li>
-                <li class="{% if page == 'create' %}active{% endif %}">
+                <li class="{% if request.path == '/create/' %}active{% endif %}">
                     <a href="/create"><i class="fa fa-fw fa-edit"></i> Create new one</a>
                 </li>
-                <li class="{% if page == 'team_work' %}active{% endif %} disabled">
+                <li class="{% if request.path == '/team_work/' %}active{% endif %} disabled">
                     <a href="/team_work"><i class="fa fa-fw fa-desktop"></i> Team work <span class="badge">12</span></a>
                 </li>
-                <li class="{% if page == 'settings' %}active{% endif %}">
+                <li class="{% if request.path == '/settings/' %}active{% endif %}">
                     <a href="/admin"><i class="fa fa-fw fa-wrench"></i> Settings</a>
                 </li>
             </ul>

@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Dashboard
+{% endblock %}
+{% block content %}
+<h1>All tasks with filters </h1>
+<div class="row">
+    <div class="col-lg-2 text-left">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false">Categories <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                {% if categorys %}
+                {% for category in categorys %}
+                    <li><a href="{# url 'category' category.id #}">{{category.name}}</a></li>
+                {% endfor %}
+                {% else %}
+                    There is no categories in project.
+                {% endif %}
+                <li role="separator" class="divider"></li>
+                <li><a href="#">All together</a></li>
+            </ul>
+        </li>
+    </div>
+    <div class="col-lg-2 text-left">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false">Status <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                {% if statuses %}
+                {% for status in statuses %}
+                    <li><a href="{# url 'dashboard' status.id #}">{{status.name}}</a></li>
+                {% endfor %}
+                {% else %}
+                    There is no status in project.
+                {% endif %}
+                <li role="separator" class="divider"></li>
+                <li><a href="#">All</a></li>
+            </ul>
+        </li>
+    </div>
+</div>
+
+{% if tasks %}
+{% for task in tasks %}
+<div class="row">
+    <div class="col-lg-6 text-left">
+        <a href="/{{task.id}}/"><h4><i class="fa fa-thumb-tack" aria-hidden="true"></i> Task-00{{task.id}}: {{task.title}}</h4></a>
+        <b>Has to be done before:</b> {{ task.deadline }}<br>
+        {{task.description}}
+        <sub><a href="/{{task.id}}/">more...</a></sub>
+    </div>
+    <div class="col-lg-2 text-left">
+        <br>
+        <sub><b>Status: </b> {{task.status|upper}} <br>
+            <b>Priority: </b>{{task.priority}}<br>
+            <b>Category: </b> {{ task.category }}<br>
+            {{task.created_date}}</sub><br>
+        <sub><i class="fa fa-user" aria-hidden="true"></i> Author: {{task.author}}</sub><br><br>
+        <br>
+    </div>
+    <div class="col-lg-2 text-left">
+        <img src="{% static '/media/default.jpg' %}">
+        <img src="..{{task.img.url}}">
+    </div>
+</div>
+<hr/>
+{% endfor %}
+{% else %}
+    Have no tasks yet.
+{% endif %}
+<div class="pagination">
+    <span class="step-links">
+        {% if tasks.has_previous %}
+            <a href="?page={{ contacts.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ tasks.number }} of {{ tasks.paginator.num_pages }}
+        </span>
+
+        {% if tasks.has_next %}
+            <a href="?page={{ tasks.next_page_number }}">Go next</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+{% endblock %}

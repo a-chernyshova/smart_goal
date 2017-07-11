@@ -10,6 +10,7 @@ from django.http import Http404, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
 
+
 # only superuser can reach this page
 @user_passes_test(lambda u: u.is_superuser)
 def admin_page(request):
@@ -17,10 +18,12 @@ def admin_page(request):
     user_form = MyRegistrationForm()
     return render(request, 'admin_page.html', {'users': users, 'form': user_form})
 
+
 def delete_user(request, user_id):
     user = get_object_or_404(User, id=user_id)
     user.delete()
     return HttpResponseRedirect('/admin_page')
+
 
 def get_user_form(request, user_id):
     if request.is_ajax():
@@ -32,6 +35,7 @@ def get_user_form(request, user_id):
         data = {'errors': False, 'html': html}
         return JsonResponse(data)
     raise Http404
+
 
 def create_user(request, user_id = None):
     if request.is_ajax():

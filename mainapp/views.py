@@ -5,10 +5,12 @@ from userManagmentApp.forms import TasksForm
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+
 def index(request):
     smart = ['Specific', 'Measurable', 'Achievable', 'Relevant', 'Time bound']
     categorys = Category.objects.all()
     return render(request, "index.html", {'smart': smart, 'categorys':categorys})
+
 
 @login_required(login_url='/index/')
 def task(request):
